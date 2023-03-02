@@ -15,11 +15,11 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
 });
-
+app.set('trust proxy', true);
 app.use(
   // FOR DEMO PURPOSES ONLY
   // Use an actual secret key in production
-  session({ secret: "bosco", saveUninitialized: true, resave: true })
+  session({ secret: "bosco", saveUninitialized: true, resave: true, proxy: true })
 );
 
 app.use(bodyParser.urlencoded({ extended: false }));
