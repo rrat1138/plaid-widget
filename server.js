@@ -88,4 +88,4 @@ app.get("/api/balance", async (req, res, next) => {
   });
 });
 
-app.listen(process.env.PORT || 8000);
+app.listen(8000);
