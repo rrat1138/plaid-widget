@@ -11,11 +11,13 @@ const { Configuration, PlaidApi, PlaidEnvironments, ProcessorTokenCreateRequest 
 const createProcessorToken = require('./create_processor_token.jsx');
 const app = express();
 
+app.set('trust proxy', 1);
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
 });
-app.set('trust proxy', true);
+
 app.use(
   // FOR DEMO PURPOSES ONLY
   // Use an actual secret key in production
