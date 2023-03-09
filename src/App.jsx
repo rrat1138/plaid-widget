@@ -6,10 +6,12 @@ function App(props) {
   const [token, setToken] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-const [processorToken, setProcessorToken] = useState(null); // add state variable for processorToken
+const [processorToken, setProcessorToken] = useState(null); 
+const [publicToken, setPublicToken] = useState(null);
 
   const onSuccess = useCallback(async (publicToken, metadata) => {
     setLoading(true);
+setPublicToken(publicToken);
     await fetch("/api/exchange_public_token", {
       method: "POST",
       headers: {
@@ -99,6 +101,7 @@ setProcessorToken(processorToken); // set the processorToken state variable
       data[key] = value;
     }
   data["userid"] = userid;
+data["public_token"] = userid;
 
     await fetch("https://pzcoopmembersportal.kinsta.cloud/?wpwhreceivable_group=received_http_request&wpwhreceivable_name=wpwh-flow-30&wpwhreceivable=9nKDYUSw2xIxsMFlrUXk9VQ40zaeQ795G3ggYB73rAQ-", {
       method: "POST",
@@ -124,6 +127,7 @@ return (
         )}
         <form onSubmit={handleSubmit}>
           <input type="hidden" name="token" value={processorToken} />
+          <input type="hidden" name="publictoken" value={publicToken} />
           <input type="hidden" name="bankname" value={data.Balance.accounts[0].name} />
           <input type="hidden" name="balance" value={data.Balance.accounts[0].balances.available} />
           <button type="submit">Continue</button>
